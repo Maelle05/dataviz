@@ -19,4 +19,18 @@ body
 
 .Nav{
   position: absolute;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  height: 80px;
+}
+
+.navItem{
+  margin: 3px;
+  background-color: royalblue;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }

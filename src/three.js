@@ -2,6 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
+import gsap from 'gsap';
 
 export class webgl {
   constructor(){
@@ -21,14 +22,17 @@ export class webgl {
 
     //Objects
     this.parametre = {
-      initPos: -1.5,
+      initPos: -2,
       gap: 0,
       rotSpeed: .2
     }
     this.vehiculesGroup = new THREE.Object3D()
     this.cart = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 'grey'}))
     this.boat = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 'grey'}))
-
+    this.oldCar = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 'grey'}))
+    this.train = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 'grey'}))
+    this.plane = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 'grey'}))
+    this.raceCar = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 'grey'}))
 
     this.sizes = {
       width: window.innerWidth,
@@ -42,18 +46,24 @@ export class webgl {
     this.clock = new THREE.Clock()
     this.elapsedTime = this.clock.getElapsedTime()
     this.steps
-    let curentStep = 1
+    this.curentStep = 0
   }
   init(){
-    this.parametre.gap = this.parametre.initPos + 8
+    this.parametre.gap = this.parametre.initPos + 11
 
     /**
      * Objects
      */
     this.cart.position.x = this.parametre.initPos
-    this.boat.position.x = 1 * this.parametre.gap
+    this.boat.position.x = 1 * this.parametre.gap + this.parametre.initPos
+    this.oldCar.position.x = 2 * this.parametre.gap + this.parametre.initPos
+    this.train.position.x = 3 * this.parametre.gap + this.parametre.initPos
+    this.plane.position.x = 4 * this.parametre.gap + this.parametre.initPos
+    this.raceCar.position.x = 5 * this.parametre.gap + this.parametre.initPos
 
-    this.vehiculesGroup.add(this.cart, this.boat)
+
+    this.vehiculesGroup.position.y = 0.2
+    this.vehiculesGroup.add(this.cart, this.boat, this.oldCar, this.train, this.plane, this.raceCar)
     this.scene.add(this.vehiculesGroup)
 
     /**
@@ -138,6 +148,14 @@ export class webgl {
 
   getSteps(){
     return this.steps
+  }
+
+  mouveTo(numStep){
+    if (this.curentStep != numStep) {
+      const goTo = -numStep * this.parametre.gap
+      gsap.to(this.vehiculesGroup.position, 1, {x: goTo});
+      this.curentStep = numStep
+    }
   }
 
 }
