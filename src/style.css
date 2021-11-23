@@ -29,8 +29,51 @@ body
 
 .navItem{
   margin: 3px;
-  background-color: royalblue;
-  width: 30px;
-  height: 30px;
+  background-color: #D3AA6B;
+  width: 24px;
+  height: 24px;
+  margin-top: 20px;
   cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 9999px;
+}
+
+.navItem > p{
+  color: #FFFFFF;
+  transform: translate(-8px, -30px);
+}
+
+.navItem.active{
+  width: 14px;
+  height: 14px;
+  margin: 5px;
+}
+
+.navItem.active > p{
+  color: #D3AA6B;
+}
+
+#vehicule{
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  bottom: 160px;
+  left: 11%;
+  min-width: 500px;
+  color: #FFFFFF;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#vehicule > svg{
+  cursor: pointer;
+}
+
+#vehicule > p{
+  margin: 5px 25px 0 25px;
+  font-size: 40px;
+  text-transform: uppercase;
+}
+
+#donnee {
+  position: absolute;
 }

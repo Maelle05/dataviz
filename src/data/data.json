@@ -1,0 +1,89 @@
+{
+  "vehicules": [
+    {
+      "id": 1,
+      "name" : "La charrette",
+      "epoque": {
+        "name": "Pré-histoire",
+        "date": "-3000"
+      },
+      "price": "10 poulets",
+      "top_speed": "12 km/h",
+      "dimensions": "9 m",
+      "capacity": "3 passagers",
+      "energy_consumption": "",
+      "number_of_sales": ""
+    },
+    {
+      "id": 2,
+      "name" : "La pirogue",
+      "epoque": {
+        "name": "Antiquité",
+        "date": "-1000"
+      },
+      "price": "2 troncs de bois",
+      "top_speed": "5 km/h",
+      "number_of_sales": "",
+      "dimensions": "12 m",
+      "capacity": "5 passagers",
+      "energy_consumption": ""
+    },
+    {
+      "id": 3,
+      "name" : "La voiture à vapeur",
+      "epoque": {
+        "name": "Les temps modernes",
+        "date": "1769"
+      },
+      "price": "10 francs/ jour",
+      "top_speed": "3.9 km/h",
+      "dimensions": "3,40m",
+      "capacity": "2 passagers",
+      "energy_consumption": "975m",
+      "number_of_sales": "1 exemplaire unique"
+    },
+    {
+      "id": 4,
+      "name" : "Locomotive Diesel",
+      "epoque": {
+        "name": "Le XXe siècle",
+        "date": "1932"
+      },
+      "price": "34M de francs",
+      "top_speed": "100km/h",
+      "dimensions": "20m",
+      "capacity": "61 passagerss",
+      "energy_consumption": "3,33 L/km",
+      "number_of_sales": "256 exemplaires"
+    }
+    ,
+    {
+      "id": 5,
+      "name" : "Avion Concorde",
+      "epoque": {
+        "name": "Le XXe siècle",
+        "date": "1962"
+      },
+      "price": "150M de francs",
+      "top_speed": "2448 km/h",
+      "dimensions": "62 m",
+      "capacity": "128 passagers",
+      "energy_consumption": "975m",
+      "number_of_sales": "20 exemplaires"
+    },
+    {
+      "id": 6,
+      "name" : "Rimac Nevera",
+      "epoque": {
+        "name": "Le XXIe siècle",
+        "date": "2021"
+      },
+      "price": "2M euros",
+      "top_speed": "412 km/h ",
+      "dimensions": "4m ",
+      "capacity": "2 passagers",
+      "energy_consumption": "550 km par batterie",
+      "number_of_sales": "150"
+    }
+  ]
+}
