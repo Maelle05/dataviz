@@ -43,7 +43,7 @@ body
   transform: translate(-8px, -30px);
 }
 
-.navItem.active{
+/* .navItem.active{
   width: 14px;
   height: 14px;
   margin: 5px;
@@ -51,7 +51,7 @@ body
 
 .navItem.active > p{
   color: #D3AA6B;
-}
+} */
 
 #vehicule{
   position: absolute;

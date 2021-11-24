@@ -6,32 +6,37 @@ const three = new webgl()
 const colorV = ["#D3AA6B", "#25A0A0", "#F2C94C", "#6B99D3", "#D36B6B", "#BED36B"]
 
 //INIT
-three.init()
+three.loader()
 setData(0)
 
-const numVehicules = three.getSteps()
-const navDiv = document.getElementById('Nav')
+//Var
 let allNavItem = []
 
-for (let i = 0; i < numVehicules; i++) {
-  const newPoint = document.createElement("div")
-  newPoint.className = 'navItem'
-  if (i === 0 ) {
-    newPoint.className = 'active navItem'
-  }
-  const date = document.createElement("p")
-  date.innerHTML = data.vehicules[i].epoque.date
-  newPoint.appendChild(date)
-  navDiv.appendChild(newPoint)
-  allNavItem.push(newPoint)
-  newPoint.addEventListener(
-    'click',
-    () => {
-      three.mouveTo(i)
-      setData(i)
-      setColor(i)
+//Function
+export function initNav() {
+  const numVehicules = three.getSteps()
+  const navDiv = document.getElementById('Nav')
+  
+  for (let i = 0; i < numVehicules; i++) {
+    const newPoint = document.createElement("div")
+    newPoint.className = 'navItem'
+    if (i === 0 ) {
+      newPoint.className = 'active navItem'
     }
-  )
+    const date = document.createElement("p")
+    date.innerHTML = data.vehicules[i].epoque.date
+    newPoint.appendChild(date)
+    navDiv.appendChild(newPoint)
+    allNavItem.push(newPoint)
+    newPoint.addEventListener(
+      'click',
+      () => {
+        three.mouveTo(i)
+        setData(i)
+        setColor(i)
+      }
+    )
+  }
 }
   
 const left = document.getElementById('rotLeft')
@@ -59,4 +64,8 @@ function setColor(step) {
     allNavItem[i].style.backgroundColor = `${colorV[step]}`
     
   }
+}
+
+function loadError(){
+  console.log('error dans le loader');
 }

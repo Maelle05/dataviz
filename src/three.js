@@ -4,6 +4,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
 import gsap from 'gsap';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { MeshoptDecoder } from 'meshoptimizer/meshopt_decoder.module';
+import { initNav } from './base';
+import { Color, MeshBasicMaterial, MeshToonMaterial } from 'three';
 
 export class webgl {
   constructor(){
@@ -37,11 +40,11 @@ export class webgl {
     this.trainG = new THREE.Object3D()
     this.planeG = new THREE.Object3D()
     this.raceCarG = new THREE.Object3D()
-    this.cart = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 'grey'}))
-    this.boat = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 'grey'}))
+    this.cart = new THREE.Object3D()
+    this.boat = new THREE.Object3D()
     this.oldCar = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 'grey'}))
-    this.train = 'train'
-    this.plane = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 'grey'}))
+    this.train = new THREE.Object3D()
+    this.plane = new THREE.Object3D()
     this.raceCar = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 'grey'}))
 
     this.sizes = {
@@ -58,24 +61,77 @@ export class webgl {
     this.steps
     this.curentStep = 0
   }
-  init(){
+  loader(){
+    const mat = new MeshToonMaterial({
+      color: new Color('#9a9fa5'),
+    })
+    this.gltfLoader.setMeshoptDecoder(MeshoptDecoder)
     this.gltfLoader.load(
-        '/models/Duck/Duck.gltf',
-        (gltf) =>
-        {
-            console.log('success')
-            console.log(gltf.scene.children[0]);
-            this.scene.add(gltf.scene.children[0])
-            // this.train = gltf.scenes[0].children[0].children[1]
-            // console.log(this.train.);
-            // this.trainG.add(this.train)
-        }
+      '/models/Duck/Duck.gltf',
+      (gltf) =>
+      {
+        console.log('success 1')
+        this.cart.add( gltf.scene.children[0] )
+        this.gltfLoader.load(
+          '/models/Locomotive.glb',
+          (gltf) =>
+          {
+            console.log('success 2')
+            gltf.scene.scale.set(.1, .1, .1)
+            this.train.add( gltf.scene )
+            gltf.scene.children.forEach(objct => {
+              objct.traverse( function (obj) {
+                if (obj.isMesh){
+                  obj.material = mat
+                }
+              })
+            });
+            this.gltfLoader.load(
+              '/models/boat.glb',
+              (gltf) =>
+              {
+                console.log('success 3')
+                gltf.scene.scale.set(.2, .2, .2)
+                console.log(gltf.scene.children[0]);
+                gltf.scene.children[0].traverse( function (obj) {
+                  if (obj.isMesh){
+                    obj.material = mat
+                  }
+                })
+                this.boat.add( gltf.scene )
+      
+                this.gltfLoader.load(
+                  '/models/plane.glb',
+                  (gltf) =>
+                  {
+                    console.log('success 4')
+                    gltf.scene.scale.set(.7,.7,.7)
+                    console.log(gltf.scene.children[0]);
+                    gltf.scene.children[0].traverse( function (obj) {
+                      if (obj.isMesh){
+                        obj.material = mat
+                      }
+                    })
+                    this.plane.add( gltf.scene )
+          
+                    this.init()
+                    initNav()
+                  }
+                )
+              }
+            )
+          }
+        )
+      }
     )
+  }
+
+  init(){
     this.parametre.gap = this.parametre.initPos + 11
     this.scene.background = new THREE.Color( 0x121212 );
     // this.scene.background = new THREE.Color( 0xFFFFFF );
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
+    const ambientLight = new THREE.AmbientLight(0xffffff, .8)
     this.scene.add(ambientLight)
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6)
@@ -104,17 +160,19 @@ export class webgl {
     this.bgCircle.position.y = -2.3
     this.bgCircle.rotation.x = 6
 
+    this.train.position.y = 0.6
+    this.plane.position.y = -2.5
+    
 
     this.vehiculesGroup.position.y = 0.2
     this.cartG.add(this.cart)
     this.boatG.add(this.boat)
     this.oldCarG.add(this.oldCar)
-    // this.trainG.add(this.train)
+    this.trainG.add(this.train)
     this.planeG.add(this.plane)
     this.raceCarG.add(this.raceCar)
     
-    // this.vehiculesGroup.add(this.cartG, this.boatG, this.oldCarG, this.trainG, this.planeG, this.raceCarG)
-    this.vehiculesGroup.add(this.cartG, this.boatG, this.oldCarG, this.planeG, this.raceCarG)
+    this.vehiculesGroup.add(this.cartG, this.boatG, this.oldCarG, this.trainG, this.planeG, this.raceCarG)
 
     this.scene.add(this.vehiculesGroup, this.bgCircle)
     /**
