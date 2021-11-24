@@ -67,11 +67,17 @@ export class webgl {
     })
     this.gltfLoader.setMeshoptDecoder(MeshoptDecoder)
     this.gltfLoader.load(
-      '/models/Duck.glb',
+      '/models/charette/charette.gltf',
       (gltf) =>
       {
         console.log('success 1')
+        gltf.scene.children[0].traverse( function (obj) {
+          if (obj.isMesh){
+            obj.material = mat
+          }
+        })
         this.cart.add( gltf.scene.children[0] )
+        this.cart.scale.set(.1, .1, .1)
         this.gltfLoader.load(
           '/models/Locomotive.glb',
           (gltf) =>
@@ -104,7 +110,7 @@ export class webgl {
                   (gltf) =>
                   {
                     console.log('success 4')
-                    gltf.scene.scale.set(.7,.7,.7)
+                    gltf.scene.scale.set(.8,.8,.8)
                     gltf.scene.children[0].traverse( function (obj) {
                       if (obj.isMesh){
                         obj.material = mat
@@ -129,7 +135,7 @@ export class webgl {
     this.scene.background = new THREE.Color( 0x121212 );
     // this.scene.background = new THREE.Color( 0xFFFFFF );
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, .8)
+    const ambientLight = new THREE.AmbientLight(0xffffff, .4)
     this.scene.add(ambientLight)
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6)
@@ -147,10 +153,10 @@ export class webgl {
      * Objects
      */
     this.cartG.position.x = this.parametre.initPos
-    this.boatG.position.x = 1 * this.parametre.gap + this.parametre.initPos
+    this.boatG.position.x = 1 * this.parametre.gap + this.parametre.initPos + 0.2
     this.oldCarG.position.x = 2 * this.parametre.gap + this.parametre.initPos
-    this.trainG.position.x = 3 * this.parametre.gap + this.parametre.initPos
-    this.planeG.position.x = 4 * this.parametre.gap + this.parametre.initPos
+    this.trainG.position.x = 3 * this.parametre.gap + this.parametre.initPos + 0.2
+    this.planeG.position.x = 4 * this.parametre.gap + this.parametre.initPos + 0.2
     this.raceCarG.position.x = 5 * this.parametre.gap + this.parametre.initPos
 
     this.bgCircle.position.x = -8.5
@@ -158,8 +164,10 @@ export class webgl {
     this.bgCircle.position.y = -2.3
     this.bgCircle.rotation.x = 6
 
-    this.train.position.y = 0.6
-    this.plane.position.y = -2.5
+    this.cart.position.y = -0.5
+    this.train.position.y = 0.7
+    this.plane.position.y = -3
+    this.boat.position.y = 0.1
     
 
     this.vehiculesGroup.position.y = 0.2

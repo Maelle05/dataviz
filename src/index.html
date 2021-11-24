@@ -8,9 +8,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Squada+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
     <canvas class="webgl"></canvas>
+    <h1>QUELLES ONT-ETE LES DIFFERENTS MODES DE TRANSPORTS A TRAVERS LES EPOQUES ?</h1>
     <div id="vehicule" >
       <svg id="rotLeft" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M41.305 31.2919C41.3424 31.1973 41.3337 31.0906 41.2815 31.0032C41.2293 30.9158 41.1394 30.8576 41.0383 30.8457C32.9541 29.894 22.1614 27.6705 15.9621 24.1155C12.8466 22.3289 11.0195 20.2816 11.0958 17.9931C11.1342 16.8442 11.6501 15.5808 12.8084 14.1976C13.942 12.8438 15.6786 11.3907 18.1399 9.84052L26.1655 14.5401C26.2596 14.5952 26.3749 14.6 26.4732 14.5527C26.5715 14.5055 26.6399 14.4125 26.6557 14.3047L28.5972 1.04752C28.6114 0.950692 28.5816 0.852592 28.516 0.780017C28.4503 0.707443 28.3557 0.667978 28.2579 0.672405L3.01916 1.81526C2.87084 1.82198 2.74554 1.92751 2.7137 2.07253C2.68186 2.21755 2.75142 2.36587 2.88328 2.4341L11.5787 6.93382C7.70637 8.85706 4.56402 11.2074 2.66354 13.8402C0.657674 16.619 0.0318441 19.7235 1.41144 22.9296C2.77969 26.1093 6.09774 29.3333 11.8401 32.442C17.5892 35.5543 25.8069 38.572 37.0392 41.3185C37.1983 41.3575 37.3618 41.2729 37.422 41.1205L41.305 31.2919Z" fill="white" stroke="white" stroke-width="0.655861" stroke-linejoin="round"/>
@@ -18,10 +20,35 @@
       <p></p>
       <svg id="rotRight" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M4.96085 41.3185C4.80166 41.3575 4.63818 41.2729 4.57796 41.1205L0.695007 31.2919C0.657608 31.1973 0.66629 31.0906 0.71851 31.0032C0.770729 30.9158 0.860561 30.8576 0.961658 30.8457C9.04593 29.894 19.8386 27.6705 26.0379 24.1155C29.1534 22.3289 30.9805 20.2816 30.9042 17.9931C30.8658 16.8442 30.3499 15.5808 29.1916 14.1976C28.058 12.8438 26.3214 11.3907 23.8601 9.84052L15.8345 14.5401C15.7404 14.5952 15.6251 14.6 15.5268 14.5527C15.4285 14.5055 15.3601 14.4125 15.3443 14.3047L13.4028 1.04752C13.3886 0.950692 13.4184 0.852592 13.484 0.780017C13.5497 0.707443 13.6443 0.667978 13.7421 0.672405L38.9808 1.81526C39.1292 1.82198 39.2545 1.92751 39.2863 2.07253C39.3181 2.21755 39.2486 2.36587 39.1167 2.4341L30.4213 6.93382C34.2936 8.85706 37.436 11.2074 39.3365 13.8402C41.3423 16.619 41.9682 19.7235 40.5886 22.9296C39.2203 26.1093 35.9023 29.3333 30.1599 32.442C24.4108 35.5543 16.1931 38.572 4.96085 41.3185Z" fill="white" stroke="white" stroke-width="0.655861" stroke-linejoin="round"/>
-      </svg>
-        
+      </svg> 
     </div>
-    <div id="donnee"></div>
+    <div id="donnee">
+      <!-- Slider main container -->
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slide-1">
+            <h2></h2>
+            <ul>
+              <li><span>Epoque</span> <p></p> </li>
+              <li><span>Date</span> <p></p> </li>
+              <li><span>Prix</span> <p></p> </li>
+              <li><span>Nb de vente</span> <p></p> </li>
+              <li><span>Vitesse max</span> <p></p> </li>
+              <li><span>Dimensions</span> <p></p> </li>
+              <li><span>Capacité</span> <p></p> </li>
+              <li><span>Consommation</span> <p></p> </li>
+            </ul>
+          </div>
+          <div class="swiper-slide slide-2">
+            <h2></h2>
+          </div>
+          <div class="swiper-slide slide-3">
+            <h2></h2>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
     <div class="Nav" id="Nav"></div>
 </body>
 </html>

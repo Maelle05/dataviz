@@ -17,6 +17,17 @@ body
   outline: none;
 }
 
+h1{
+  position: absolute;
+  color: #FFFFFF;
+  font-family: 'Squada One', cursive;
+  max-width: 500px;
+  top: 70px;
+  left: 11vw;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
 .Nav{
   position: absolute;
   display: flex;
@@ -61,7 +72,6 @@ body
   transform: translate(-6px, -28px);
 }
 
-
 .navItem.active > p{
   transform: translate(-15px, -34px);
 }
@@ -86,8 +96,76 @@ body
   font-size: 40px;
   font-family: 'Squada One', cursive;
   text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 #donnee {
+  border-radius: 10px;
   position: absolute;
+  background-color: #FFFFFF0D;
+  width: 30%;
+  height: 70%;
+  right: 8vw;
+  top: 70px;
 }
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-pagination-bullet{
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active{
+  background-color: #FFFFFF;
+}
+
+.swiper-slide > h2{
+  color: #FFFFFF;
+  text-transform: uppercase;
+  text-align: center;
+  max-width: 300px;
+  margin: auto;
+  font-size: 24px;
+  line-height: 31px;
+  font-family: 'Squada One', cursive;
+  letter-spacing: 0.02em;
+  margin-top: 24px;
+}
+
+.swiper-slide > ul {
+  margin: auto;
+  list-style: none;
+  max-width: 260px;
+  margin-top: 20px;
+}
+
+.swiper-slide > ul > li{
+  margin-top: 12px;
+  padding-bottom: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px #FFFFFF solid;
+}
+
+.swiper-slide > ul > li:last-child{
+  border-bottom: none;
+}
+
+.swiper-slide > ul > li > span {
+  color: #FFFFFF;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+}
+.swiper-slide > ul > li > p {
+  color: #FFFFFF;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+

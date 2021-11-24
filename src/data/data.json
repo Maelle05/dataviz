@@ -11,8 +11,8 @@
       "top_speed": "12 km/h",
       "dimensions": "9 m",
       "capacity": "3 passagers",
-      "energy_consumption": "",
-      "number_of_sales": ""
+      "energy_consumption": "/",
+      "number_of_sales": "/"
     },
     {
       "id": 2,
@@ -23,10 +23,10 @@
       },
       "price": "2 troncs de bois",
       "top_speed": "5 km/h",
-      "number_of_sales": "",
+      "number_of_sales": "/",
       "dimensions": "12 m",
       "capacity": "5 passagers",
-      "energy_consumption": ""
+      "energy_consumption": "/"
     },
     {
       "id": 3,
