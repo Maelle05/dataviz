@@ -67,7 +67,7 @@ export class webgl {
     })
     this.gltfLoader.setMeshoptDecoder(MeshoptDecoder)
     this.gltfLoader.load(
-      '/models/Duck/Duck.gltf',
+      '/models/Duck.glb',
       (gltf) =>
       {
         console.log('success 1')
@@ -92,7 +92,6 @@ export class webgl {
               {
                 console.log('success 3')
                 gltf.scene.scale.set(.2, .2, .2)
-                console.log(gltf.scene.children[0]);
                 gltf.scene.children[0].traverse( function (obj) {
                   if (obj.isMesh){
                     obj.material = mat
@@ -106,7 +105,6 @@ export class webgl {
                   {
                     console.log('success 4')
                     gltf.scene.scale.set(.7,.7,.7)
-                    console.log(gltf.scene.children[0]);
                     gltf.scene.children[0].traverse( function (obj) {
                       if (obj.isMesh){
                         obj.material = mat
@@ -127,7 +125,7 @@ export class webgl {
   }
 
   init(){
-    this.parametre.gap = this.parametre.initPos + 11
+    this.parametre.gap = this.parametre.initPos + 14
     this.scene.background = new THREE.Color( 0x121212 );
     // this.scene.background = new THREE.Color( 0xFFFFFF );
 

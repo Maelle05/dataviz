@@ -11,14 +11,15 @@ setData(0)
 
 //Var
 let allNavItem = []
+const navDiv = document.getElementById('Nav')
 
 //Function
 export function initNav() {
   const numVehicules = three.getSteps()
-  const navDiv = document.getElementById('Nav')
   
   for (let i = 0; i < numVehicules; i++) {
     const newPoint = document.createElement("div")
+    const span = document.createElement("span")
     newPoint.className = 'navItem'
     if (i === 0 ) {
       newPoint.className = 'active navItem'
@@ -26,6 +27,7 @@ export function initNav() {
     const date = document.createElement("p")
     date.innerHTML = data.vehicules[i].epoque.date
     newPoint.appendChild(date)
+    newPoint.appendChild(span)
     navDiv.appendChild(newPoint)
     allNavItem.push(newPoint)
     newPoint.addEventListener(
@@ -62,10 +64,13 @@ function setColor(step) {
   three.setColor(colorV[step])
   for (let i = 0; i < allNavItem.length; i++) {
     allNavItem[i].style.backgroundColor = `${colorV[step]}`
-    
+    if (i === step) {
+      allNavItem[i].classList.add("active")
+      allNavItem[i].style.color = colorV[step]
+      allNavItem[i].querySelector("span").style.color = colorV[step]
+    } else {
+      allNavItem[i].classList.remove("active")
+      allNavItem[i].style.color = '#FFF'
+    }
   }
-}
-
-function loadError(){
-  console.log('error dans le loader');
 }

@@ -36,22 +36,35 @@ body
   cursor: pointer;
   font-family: 'Open Sans', sans-serif;
   border-radius: 9999px;
+  color: #FFFFFF;
 }
 
 .navItem > p{
-  color: #FFFFFF;
   transform: translate(-8px, -30px);
 }
 
-/* .navItem.active{
+.navItem.active{
   width: 14px;
   height: 14px;
-  margin: 5px;
+  margin: 8px;
+  margin-top: 23px;
+  color: #D3AA6B;
+  transition: all .3s;
+}
+.navItem.active > span{
+  width: 24px;
+  height: 24px;
+  border: solid #D3AA6B 1px;
+  border-radius: 99999px;
+  display: block;
+  position: absolute;
+  transform: translate(-6px, -28px);
 }
 
+
 .navItem.active > p{
-  color: #D3AA6B;
-} */
+  transform: translate(-15px, -34px);
+}
 
 #vehicule{
   position: absolute;
@@ -71,6 +84,7 @@ body
 #vehicule > p{
   margin: 5px 25px 0 25px;
   font-size: 40px;
+  font-family: 'Squada One', cursive;
   text-transform: uppercase;
 }
 
