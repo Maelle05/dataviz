@@ -60,6 +60,7 @@ export class webgl {
     this.elapsedTime = this.clock.getElapsedTime()
     this.steps
     this.curentStep = 0
+    this.mobile = window.innerWidth > 1000 ? false : true
   }
   loader(){
     // const mat = new MeshToonMaterial({
@@ -177,8 +178,12 @@ export class webgl {
   }
 
   init(){
+    if (this.mobile) {
+      this.parametre.initPos = -0.2
+    }
     this.parametre.gap = this.parametre.initPos + 14
     this.scene.background = new THREE.Color( 0x121212 );
+    console.log(this.mobile);
     // this.scene.background = new THREE.Color( 0xFFFFFF );
 
     // const ambientLight = new THREE.AmbientLight(0xffffff, .4)
@@ -260,6 +265,9 @@ export class webgl {
     this.camera.position.x = 0
     this.camera.position.y = 1
     this.camera.position.z = 3
+    if (this.sizes.width < 500) {
+      this.camera.position.z = 4.5
+    }
     this.scene.add(this.camera)
 
     /**
