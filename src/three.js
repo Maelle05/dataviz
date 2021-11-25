@@ -5,7 +5,7 @@ import * as dat from 'lil-gui'
 import gsap from 'gsap';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { MeshoptDecoder } from 'meshoptimizer/meshopt_decoder.module';
-import { initNav } from './base';
+import { endChargement, initNav } from './base';
 import { Color, MeshBasicMaterial, MeshToonMaterial } from 'three';
 
 export class webgl {
@@ -27,7 +27,7 @@ export class webgl {
 
     //Objects
     this.parametre = {
-      initPos: -2,
+      initPos: -1.8,
       gap: 0,
       rotSpeed: .2
     }
@@ -42,10 +42,10 @@ export class webgl {
     this.raceCarG = new THREE.Object3D()
     this.cart = new THREE.Object3D()
     this.boat = new THREE.Object3D()
-    this.oldCar = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 'grey'}))
+    this.oldCar = new THREE.Object3D()
     this.train = new THREE.Object3D()
     this.plane = new THREE.Object3D()
-    this.raceCar = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 'grey'}))
+    this.raceCar = new THREE.Object3D()
 
     this.sizes = {
       width: window.innerWidth,
@@ -62,15 +62,21 @@ export class webgl {
     this.curentStep = 0
   }
   loader(){
-    const mat = new MeshToonMaterial({
-      color: new Color('#9a9fa5'),
-    })
+    // const mat = new MeshToonMaterial({
+    //   color: new Color('#9a9fa5'),
+    // })
+    const matcap = this.textureLoader.load('/matcap/12.jpeg')
+    const mat = new THREE.MeshMatcapMaterial()
+    mat.matcap = matcap
     this.gltfLoader.setMeshoptDecoder(MeshoptDecoder)
+    const loaderText = document.querySelector('#loader > div > p')
+    loaderText.innerHTML = 'Chargement de la charette ...'
     this.gltfLoader.load(
       '/models/charette/charette.gltf',
       (gltf) =>
       {
         console.log('success 1')
+        loaderText.innerHTML = 'Chargement de la locomotive ...'
         gltf.scene.children[0].traverse( function (obj) {
           if (obj.isMesh){
             obj.material = mat
@@ -83,6 +89,7 @@ export class webgl {
           (gltf) =>
           {
             console.log('success 2')
+            loaderText.innerHTML = 'Chargement du bateau ...'
             gltf.scene.scale.set(.1, .1, .1)
             this.train.add( gltf.scene )
             gltf.scene.children.forEach(objct => {
@@ -97,6 +104,7 @@ export class webgl {
               (gltf) =>
               {
                 console.log('success 3')
+                loaderText.innerHTML = 'Chargement de l\' avion ...'
                 gltf.scene.scale.set(.2, .2, .2)
                 gltf.scene.children[0].traverse( function (obj) {
                   if (obj.isMesh){
@@ -110,6 +118,7 @@ export class webgl {
                   (gltf) =>
                   {
                     console.log('success 4')
+                    loaderText.innerHTML = 'Chargement de la voiture à vapeur ...'
                     gltf.scene.scale.set(.8,.8,.8)
                     gltf.scene.children[0].traverse( function (obj) {
                       if (obj.isMesh){
@@ -117,9 +126,46 @@ export class webgl {
                       }
                     })
                     this.plane.add( gltf.scene )
-          
-                    this.init()
-                    initNav()
+
+                    this.gltfLoader.load(
+                      '/models/voiture_a_vapeur.glb',
+                      (gltf) =>
+                      {
+                        console.log('success 5')
+                        loaderText.innerHTML = 'Chargement de la voiture de course ...'
+                        gltf.scene.scale.set(.1,.1,.1)
+                        gltf.scene.children.forEach(children => {
+                          children.traverse( function (obj) {
+                            if (obj.isMesh){
+                              obj.material = mat
+                            }
+                          })
+                        });
+                        this.oldCar.add( gltf.scene )
+              
+                        this.gltfLoader.load(
+                          '/models/bugatti.glb',
+                          (gltf) =>
+                          {
+                            console.log('success 6')
+                            loaderText.innerHTML = 'Chargement terminé !'
+                            gltf.scene.scale.set(.28,.28,.28)
+                            gltf.scene.children.forEach(children => {
+                              children.traverse( function (obj) {
+                                if (obj.isMesh){
+                                  obj.material = mat
+                                }
+                              })
+                            });
+                            this.raceCar.add( gltf.scene )
+                  
+                            this.init()
+                            initNav()
+                            endChargement()
+                          }
+                        )
+                      }
+                    )
                   }
                 )
               }
@@ -135,28 +181,28 @@ export class webgl {
     this.scene.background = new THREE.Color( 0x121212 );
     // this.scene.background = new THREE.Color( 0xFFFFFF );
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, .4)
-    this.scene.add(ambientLight)
+    // const ambientLight = new THREE.AmbientLight(0xffffff, .4)
+    // this.scene.add(ambientLight)
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6)
-    directionalLight.castShadow = true
-    directionalLight.shadow.mapSize.set(1024, 1024)
-    directionalLight.shadow.camera.far = 15
-    directionalLight.shadow.camera.left = - 7
-    directionalLight.shadow.camera.top = 7
-    directionalLight.shadow.camera.right = 7
-    directionalLight.shadow.camera.bottom = - 7
-    directionalLight.position.set(- 5, 5, 0)
-    this.scene.add(directionalLight)
+    // const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6)
+    // directionalLight.castShadow = true
+    // directionalLight.shadow.mapSize.set(1024, 1024)
+    // directionalLight.shadow.camera.far = 15
+    // directionalLight.shadow.camera.left = - 7
+    // directionalLight.shadow.camera.top = 7
+    // directionalLight.shadow.camera.right = 7
+    // directionalLight.shadow.camera.bottom = - 7
+    // directionalLight.position.set(- 5, 5, 0)
+    // this.scene.add(directionalLight)
 
     /**
      * Objects
      */
     this.cartG.position.x = this.parametre.initPos
-    this.boatG.position.x = 1 * this.parametre.gap + this.parametre.initPos + 0.2
+    this.boatG.position.x = 1 * this.parametre.gap + this.parametre.initPos
     this.oldCarG.position.x = 2 * this.parametre.gap + this.parametre.initPos
-    this.trainG.position.x = 3 * this.parametre.gap + this.parametre.initPos + 0.2
-    this.planeG.position.x = 4 * this.parametre.gap + this.parametre.initPos + 0.2
+    this.trainG.position.x = 3 * this.parametre.gap + this.parametre.initPos
+    this.planeG.position.x = 4 * this.parametre.gap + this.parametre.initPos
     this.raceCarG.position.x = 5 * this.parametre.gap + this.parametre.initPos
 
     this.bgCircle.position.x = -8.5
@@ -168,6 +214,7 @@ export class webgl {
     this.train.position.y = 0.7
     this.plane.position.y = -3
     this.boat.position.y = 0.1
+    this.raceCar.position.y = 0.1
     
 
     this.vehiculesGroup.position.y = 0.2

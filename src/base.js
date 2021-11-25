@@ -8,8 +8,16 @@ const colorV = ["#D3AA6B", "#25A0A0", "#F2C94C", "#6B99D3", "#D36B6B", "#BED36B"
 
 //INIT
 three.loader()
-initSlider()
-setData(0)
+
+export function endChargement(){
+  initSlider()
+  setData(0)
+  document.querySelector("#loader").style.opacity = "0"
+  setTimeout(()=>{
+    document.querySelector("#loader").style.display = "none"
+  }, 300)
+}
+
 
 //Var
 let allNavItem = []

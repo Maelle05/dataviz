@@ -9,6 +9,41 @@ body
   overflow: hidden;
 }
 
+#loader{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #121212;
+  z-index: 5;
+  transition: all .3s;
+}
+
+#loader > div {
+  margin: auto;
+  max-width: 700px;
+  margin-top: 20%;
+}
+
+#loader > div > h2 {
+  font-size: 40px;
+  color: #FFFFFF;
+  font-family: 'Squada One', cursive;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+#loader > div > p {
+  font-size: 20px;
+  color: #FFFFFF;
+  font-family: 'Open Sans', sans-serif;
+  margin-top: 20px;
+  text-align: center;
+}
+
+
 .webgl
 {
   position: fixed;
@@ -169,3 +204,78 @@ h1{
   font-size: 14px;
 }
 
+.slide-3 > div > svg {
+  width: 100%;
+}
+
+.slide-3 > div {
+  max-width: 300px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+/* Round Chart */
+
+.slide-2 > div{
+  max-width: 300px;
+  margin: auto;
+}
+
+.slide-2 > div > svg {
+  width: 100%;
+}
+
+.slide-2 > div > svg > path {
+  border-radius: 50%;
+}
+
+/* Loader  */
+
+.spinner {
+  margin: 40px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  text-align: center;
+  
+  -webkit-animation: sk-rotate 2.0s infinite linear;
+  animation: sk-rotate 2.0s infinite linear;
+}
+
+.dot1, .dot2 {
+  width: 60%;
+  height: 60%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  background-color: rgb(255, 255, 255);
+  border-radius: 100%;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+  top: auto;
+  bottom: 0;
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-rotate { 100% { -webkit-transform: rotate(360deg) }}
+@keyframes sk-rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
